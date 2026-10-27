@@ -2,6 +2,8 @@
 
 ## Scope
 
+This model covers Fenestra v1 (milestone M1): View-only streaming between a Mac and an iPhone or iPad on the same home Wi-Fi network. Threats that only apply to later milestones are marked with the milestone they apply to. This document must be revisited before M3 adds remote control and before remote access outside the home network is added.
+
 ## System Overview
 
 Fenestra v1 has two apps that talk directly to each other over the local network. There is no server in between.
@@ -28,6 +30,18 @@ Fenestra v1 has two apps that talk directly to each other over the local network
 - **Mac app ↔ macOS:** The app can only capture the screen if the user grants screen recording permission.
 
 ## Assets
+
+| Asset | Why it matters | Milestone |
+|---|---|---|
+| Screen contents | Anything on screen can be exposed: passwords, banking, messages, notifications. | M1 |
+| Pairing credentials | Whoever holds them can connect as a trusted device. | M1 |
+| Paired device list | Adding a device to it grants that device access. | M1 |
+| The Mac itself | The Mac app accepts network connections, so a bug in how it handles them could let an attacker crash it or run code. | M1 |
+| The iPhone/iPad itself | The viewer accepts video from the network, so a malicious host could send malformed data to crash the app or run code. | M1 |
+| Stream availability | The user should be able to stream when they want to; disruption is an annoyance rather than a leak. | M1 |
+| Window list | Window titles can reveal private information (email subjects, document names, sites) even without any video. | M2 |
+| Share selection | When the user shares one window, nothing outside that window should be visible. | M2 |
+| Control of the Mac | Mouse and keyboard input from the phone controls the Mac fully. | M3 |
 
 ## Threats
 
