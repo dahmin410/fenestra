@@ -50,6 +50,14 @@ Fenestra v1 has two apps that talk directly to each other over the local network
 | TH-1 | An unknown phone connects to the Mac pretending to be a trusted device. | S | Screen contents | First connection requires approval on the Mac plus a pairing code shown on the Mac and entered on the phone. Later connections must prove identity with the stored credential. | FR-4, NFR-6 |
 | TH-2 | A fake Mac on the network advertises itself as the user's Mac. | S | The iPhone/iPad itself | The viewer only connects without re-pairing to a Mac that proves it holds the credential from pairing. | FR-4 |
 | TH-3 | A lost or stolen phone that is already paired is used to connect. | S | Screen contents | The Mac app lets the user see and remove paired devices. | *(new)* |
+| TH-4 | Someone on the network records the stream. | I | Screen contents | All traffic is encrypted, with no unencrypted fallback. | NFR-5 |
+| TH-5 | The discovery broadcast reveals the Mac's name, which often includes the owner's name, to everyone on the network. | I | Screen contents | Advertise only what is needed to connect, let the user rename the Mac in the app, and only advertise while sharing is turned on. | FR-2 |
+| TH-6 | (M2) Window titles are read off the network. | I | Window list | The window list is only sent to an authenticated device over the encrypted connection. | NFR-5 |
+| TH-7 | The last streamed frame is saved on the phone by the iOS app switcher snapshot. | I | Screen contents | Hide the stream when the app leaves the foreground, and never write frames to disk or logs. | *(new)* |
+| TH-8 | Pairing credentials are copied off the phone or Mac. | I | Pairing credentials | Credentials are stored in the Keychain, never in plain files. | NFR-6 |
+| TH-9 | An attacker between the devices alters or injects frames, so the user sees a fake screen. Becomes more serious in M3, when the user acts on what they see. | T | Screen contents | The encrypted connection is also authenticated, so any altered data is detected and rejected. | NFR-5 |
+| TH-10 | An attacker records valid messages and resends them later (replay). | T | Paired device list | Every message is unique and ordered, and the protocol rejects repeats. | NFR-5 |
+| TH-11 | Other software on the Mac edits the paired device list to add an attacker's device. | T | Paired device list | The paired device list and its credentials are stored in the Keychain, not in plain files. | NFR-6 |
 
 ## Accepted Risks
 
