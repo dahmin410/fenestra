@@ -79,3 +79,15 @@ Fenestra v1 has two apps that talk directly to each other over the local network
 | Discovery reveals that a Fenestra Mac is on the network. | Discovery is required for FR-2. TH-10 limits what it reveals. |
 
 ## Review
+
+This model is reviewed at the end of each milestone and whenever the design changes.
+
+At each review:
+
+- Confirm every mitigation for that milestone is built, and tested where possible.
+- Add any new threats found during development, using the next unused ID. Existing IDs are never renumbered; a threat that no longer applies is marked as withdrawn instead of deleted.
+- Update Accepted Risks if anything has changed.
+
+| Date | Milestone | Notes |
+|---|---|---|
+| 2026-10-28 | M0 | Initial threat model. |
