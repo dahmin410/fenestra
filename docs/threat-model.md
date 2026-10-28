@@ -49,7 +49,7 @@ Fenestra v1 has two apps that talk directly to each other over the local network
 |---|---|---|---|---|---|
 | TH-1 | An unknown phone connects to the Mac pretending to be a trusted device. | S | Screen contents | New devices can only request pairing while pairing mode is turned on in the Mac app. The first connection requires approval on the Mac plus a pairing code shown on the Mac and entered on the phone. Later connections must prove identity with the stored credential. | FR-4, NFR-6 |
 | TH-2 | A fake Mac on the network advertises itself as the user's Mac. | S | The iPhone/iPad itself | The viewer only connects without re-pairing to a Mac that proves it holds the credential from pairing. | FR-4 |
-| TH-3 | A lost or stolen phone that is already paired is used to connect. | S | Screen contents | The Mac app lets the user see and remove paired devices. | *(new)* |
+| TH-3 | A lost or stolen phone that is already paired is used to connect. | S | Screen contents | The pairing credential can only be used after Face ID or the device passcode, checked once each time the app is opened. The Mac app also lets the user see and remove paired devices. | *(new)* |
 | TH-4 | An attacker between the devices alters or injects frames, so the user sees a fake screen. Becomes more serious in M3, when the user acts on what they see. | T | Screen contents | The encrypted connection is also authenticated, so any altered data is detected and rejected. | NFR-5 |
 | TH-5 | An attacker records valid messages and resends them later (replay). | T | Paired device list | Every message is unique and ordered, and the protocol rejects repeats. | NFR-5 |
 | TH-6 | Other software on the Mac edits the paired device list to add an attacker's device. | T | Paired device list | The paired device list and its credentials are stored in the Keychain, not in plain files. | NFR-6 |
@@ -69,5 +69,13 @@ Fenestra v1 has two apps that talk directly to each other over the local network
 | TH-20 | (M3) A device that can watch is used to control the Mac. | E | Control of the Mac | Control is a separate permission granted per device, and the Mac only requests the Accessibility permission once control is turned on. | *(new)* |
 
 ## Accepted Risks
+
+| Risk | Why it's accepted |
+|---|---|
+| Malware already running with full control of the Mac or phone. | It can already see the screen without Fenestra. Protecting a compromised device is the operating system's job. |
+| Someone jams or disrupts the Wi-Fi. | No app can prevent this. Fenestra shows the disconnect and reconnects when the network returns (FR-8). |
+| Someone looks at the phone's screen, or takes a screenshot or screen recording on it. | Once frames are shown to the user, Fenestra can't control what happens to them. |
+| Someone who knows the phone's passcode uses a stolen phone before the user removes it from the Mac. | The passcode fallback is needed for devices or moments where Face ID fails. The risk ends once the user removes the device (TH-3). |
+| Discovery reveals that a Fenestra Mac is on the network. | Discovery is required for FR-2. TH-10 limits what it reveals. |
 
 ## Review
