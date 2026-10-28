@@ -16,6 +16,13 @@ Fenestra is a free, open-source app that streams your Mac's screen or windowed a
 - **FR-6:** The iPhone app must show the stream live, fit to the screen without stretching, with pinch-to-zoom.
 - **FR-7:** The Mac app must show when it is streaming and let the user stop streaming at any time.
 - **FR-8:** If the connection drops, the iPhone app must show that it's disconnected and try to reconnect automatically.
+- **FR-9:** The Mac app must only accept new pairing requests while the user has turned on pairing mode, and must show at most one pairing prompt at a time. (TH-1, TH-15)
+- **FR-10:** Pairing must require entering, on the iPhone, a code shown on the Mac. (TH-1)
+- **FR-11:** The Mac app must let the user choose the name it advertises, and must only advertise while sharing is turned on. (TH-10)
+- **FR-12:** The Mac app must list paired devices and let the user remove any of them. A removed device must pair again to connect. (TH-3)
+- **FR-13:** The iPhone app must require Face ID or the device passcode each time it is opened before connecting. Automatic reconnects in the same session must not ask again. (TH-3)
+- **FR-14:** While streaming, the Mac app must show which device is connected, and show a notification when a device connects. (TH-8)
+- **FR-15:** The Mac app must keep a local log of pairings, connections, disconnections, and removed devices, and let the user view it. (TH-7)
 
 ## Non-Functional Requirements
 
@@ -34,6 +41,10 @@ Fenestra is a free, open-source app that streams your Mac's screen or windowed a
 - **NFR-5:** All traffic between devices must be encrypted.
 - **NFR-6:** Pairing credentials must be stored in the system Keychain, not in plain files.
 - **NFR-7:** No screen data may leave the local network, and the app must not collect analytics.
+- **NFR-9:** Stream frames must never be written to disk or logs, and the iPhone app must hide the stream whenever it leaves the foreground. (TH-11)
+- **NFR-10:** The Mac app must limit how quickly it accepts connection attempts, and must not start screen capture for a device until that device is authenticated. (TH-14)
+- **NFR-11:** The Mac app must check every incoming message against what the sending device is allowed to do, and reject anything else. (TH-17)
+
 
 ### Compatibility
 
@@ -51,8 +62,8 @@ Project skeleton with no streaming yet.
 
 ### M1: View the desktop
 
-- FR-1 through FR-8 complete
-- NFR-1 through NFR-7 measured, with results recorded against their musts and goals
+- FR-1 through FR-15 complete
+- NFR-1 through NFR-7 and NFR-9 through NFR-11 met, with performance results recorded against their musts and goals
 
 ### M2: Window mode
 
