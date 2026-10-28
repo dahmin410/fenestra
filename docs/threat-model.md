@@ -45,6 +45,12 @@ Fenestra v1 has two apps that talk directly to each other over the local network
 
 ## Threats
 
+| ID | Threat | STRIDE | Asset | Mitigation | Requirement |
+|---|---|---|---|---|---|
+| TH-1 | An unknown phone connects to the Mac pretending to be a trusted device. | S | Screen contents | First connection requires approval on the Mac plus a pairing code shown on the Mac and entered on the phone. Later connections must prove identity with the stored credential. | FR-4, NFR-6 |
+| TH-2 | A fake Mac on the network advertises itself as the user's Mac. | S | The iPhone/iPad itself | The viewer only connects without re-pairing to a Mac that proves it holds the credential from pairing. | FR-4 |
+| TH-3 | A lost or stolen phone that is already paired is used to connect. | S | Screen contents | The Mac app lets the user see and remove paired devices. | *(new)* |
+
 ## Accepted Risks
 
 ## Review
